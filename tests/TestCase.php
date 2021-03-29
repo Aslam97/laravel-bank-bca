@@ -1,6 +1,6 @@
 <?php
 
-namespace Aslam\Bri\Tests;
+namespace Aslam\Bca\Tests;
 
 use PHPUnit\Framework\TestCase as BaseTestCase;
 
