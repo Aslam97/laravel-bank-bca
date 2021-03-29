@@ -4,15 +4,11 @@ namespace Aslam\Bca;
 
 use Aslam\Bca\Exceptions\ConnectionException;
 use Aslam\Bca\Exceptions\RequestException;
-use Aslam\Bca\Modules\OGP;
-use Aslam\Bca\Traits;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 
 class Bca
 {
-    use Traits\Token;
-
     /**
      * API url
      *
@@ -25,14 +21,35 @@ class Bca
      *
      * @var string
      */
-    private $clientId;
+    protected $clientId;
 
     /**
      * Application client secret
      *
      * @var string
      */
-    private $clientSecret;
+    protected $clientSecret;
+
+    /**
+     * apiKey
+     *
+     * @var mixed
+     */
+    private $apiKey;
+
+    /**
+     * apiSecret
+     *
+     * @var mixed
+     */
+    private $apiSecret;
+
+    /**
+     * corporateId
+     *
+     * @var string
+     */
+    protected $corporateID;
 
     /**
      * token
@@ -42,6 +59,13 @@ class Bca
     private $token;
 
     /**
+     * servicePath
+     *
+     * @var string
+     */
+    private $servicePath = 'Aslam\\Bca\\Services\\';
+
+    /**
      * Init
      *
      * @param  mixed $token
@@ -49,9 +73,12 @@ class Bca
      */
     public function __construct($token = null)
     {
-        $this->apiUrl = config('bank-bni.api_url');
-        $this->clientId = config('bank-bni.client_id');
-        $this->clientSecret = config('bank-bni.client_secret');
+        $this->apiUrl = config('bank-bca.api_url');
+        $this->clientId = config('bank-bca.client_id');
+        $this->clientSecret = config('bank-bca.client_secret');
+        $this->apiKey = config('bank-bca.api_key');
+        $this->apiSecret = config('bank-bca.api_secret');
+        $this->corporateID = config('bank-bca.corporate_id');
         $this->token = $token;
     }
 
@@ -65,30 +92,41 @@ class Bca
      *
      * @throws \Aslam\Bca\Exceptions\RequestException
      */
-    public function sendRequest(string $httpMethod, string $requestUrl, array $data = [])
+    public function sendRequest(string $httpMethod, string $relativeUrl, array $requestBody = [])
     {
         try {
             $options = ['http_errors' => false];
 
             if (!$this->token) {
-                $options = array_merge($options, $data);
+                $options = array_merge($options, $requestBody);
+
             } else {
-                // set token
-                $options['query'] = ['access_token' => $this->token];
+
+                $url = url_sort_lexicographically("{$httpMethod}:{$relativeUrl}");
+                $timestamp = bca_timestamp();
+                ksort($requestBody);
 
                 // set headers
                 $options['headers'] = [
+                    'Accept' => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->token,
                     'Content-Type' => 'application/json',
-                    'X-API-Key' => config('bank-bni.api_key'),
+                    'X-BCA-Key' => $this->apiKey,
+                    'X-BCA-Timestamp' => $timestamp,
+                    'X-BCA-Signature' => bca_signature($url, $this->token, $this->apiSecret, $timestamp, $requestBody),
                 ];
 
-                // set body
-                $options['json'] = generate_signature($data);
+                $methods = ['POST', 'PUT', 'PATCH'];
+
+                if (in_array($httpMethod, $methods)) {
+                    $options['body'] = json_encode($requestBody, JSON_UNESCAPED_SLASHES);
+                }
+                // dd($this->apiUrl . $relativeUrl);
             }
 
             return tap(
                 new Response(
-                    (new Client())->request($httpMethod, $requestUrl, $options)
+                    (new Client())->request($httpMethod, $this->apiUrl . $relativeUrl, $options)
                 ),
                 function ($response) {
                     if (!$response->successful()) {
@@ -118,12 +156,14 @@ class Bca
     }
 
     /**
-     * One Gate Payment
+     * service
      *
-     * @return \Aslam\Bca\Modules\OGP
+     * @param  string $serviceName
+     * @return \Aslam\Bca\Modules
      */
-    public function oneGatePayment()
+    public function service($serviceName)
     {
-        return new OGP($this->token);
+        $service = $this->servicePath . $serviceName;
+        return new $service($this->token);
     }
 }

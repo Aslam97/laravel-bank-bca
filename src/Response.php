@@ -1,9 +1,9 @@
 <?php
 
-namespace Aslam\Bni;
+namespace Aslam\Bca;
 
 use ArrayAccess;
-use Aslam\Bni\Exceptions\RequestException;
+use Aslam\Bca\Exceptions\RequestException;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Traits\Macroable;
 
