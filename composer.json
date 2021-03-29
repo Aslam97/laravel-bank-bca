@@ -1,0 +1,56 @@
+{
+    "name": "aslam/laravel-bank-bca",
+    "description": "Laravel package for BCA API",
+    "keywords": [
+        "laravel-bca",
+        "bca-api",
+        "laravel-bank-bca"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aslam",
+            "email": "iupin5212@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Aslam\\Bca\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aslam\\Bca\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Aslam\\Bca\\Providers\\BcaServiceProvider"
+            ],
+            "aliases": {
+                "BcaAPI": "Aslam\\Bca\\Facades\\BcaFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.2|^8.0",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.2",
+        "illuminate/collections": "^6.0 || ^7.0 || ^8.0",
+        "illuminate/macroable": "^6.0 || ^7.0 || ^8.0",
+        "illuminate/support": "^6.0 || ^7.0 || ^8.0"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
+}
