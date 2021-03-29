@@ -46,7 +46,7 @@ if (!function_exists('bca_signature')) {
         $stringToSign = sprintf('%s:%s:%s:%s', $url, $accessToken, $requestBody, $timestamp);
 
         $signature = hash_hmac('sha256', $stringToSign, $apiSecret, false);
-        // dd($url, $accessToken, $apiSecret, $timestamp, $requestBody, $signature);
+
         return $signature;
     }
 }

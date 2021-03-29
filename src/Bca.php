@@ -121,7 +121,6 @@ class Bca
                 if (in_array($httpMethod, $methods)) {
                     $options['body'] = json_encode($requestBody, JSON_UNESCAPED_SLASHES);
                 }
-                // dd($this->apiUrl . $relativeUrl);
             }
 
             return tap(
