@@ -53,6 +53,11 @@ if (!function_exists('bca_signature')) {
 
 if (!function_exists('bca_timestamp')) {
 
+    /**
+     * Generate BCA timestamp
+     *
+     * @return ISOTIME
+     */
     function bca_timestamp()
     {
         $dateTime = new DateTime();
@@ -63,10 +68,10 @@ if (!function_exists('bca_timestamp')) {
 if (!function_exists('build_url')) {
 
     /**
-     * build_url
+     * Build url from parse_url. i'd say revese url
      *
      * @param  array $parts
-     * @return void
+     * @return string
      */
     function build_url(array $parts)
     {
@@ -86,10 +91,10 @@ if (!function_exists('build_url')) {
 if (!function_exists('url_sort_lexicographically')) {
 
     /**
-     * url_sort_lexicographically
+     * sorting url query
      *
      * @param  string $string
-     * @return build_url
+     * @return string
      */
     function url_sort_lexicographically(string $string)
     {
@@ -102,6 +107,7 @@ if (!function_exists('url_sort_lexicographically')) {
         $query_sorted = http_build_query($result);
 
         if ($query_sorted) {
+
             $path['query'] = $query_sorted;
             $reverse_url = build_url($path);
 

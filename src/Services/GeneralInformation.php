@@ -19,6 +19,11 @@ class GeneralInformation extends Bca
         return $this->sendRequest('GET', $requestUrl);
     }
 
+    /**
+     * NearestBranchLocation
+     *
+     * @return void
+     */
     public function NearestBranchLocation()
     {
 

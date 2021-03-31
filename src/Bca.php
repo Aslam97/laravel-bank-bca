@@ -155,7 +155,7 @@ class Bca
     }
 
     /**
-     * service
+     * Dynamiclly bind class
      *
      * @param  string $serviceName
      * @return \Aslam\Bca\Modules

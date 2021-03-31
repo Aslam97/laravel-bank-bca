@@ -64,7 +64,7 @@ class BusinessBanking extends Bca
     }
 
     /**
-     * SetCorporateID
+     * Dynamiclly set corporate ID
      *
      * @param  string $corporateID
      * @return $this
