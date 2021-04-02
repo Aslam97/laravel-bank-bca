@@ -21,7 +21,7 @@ class BusinessBanking extends Bca
      * BalanceInformation
      *
      * @param  string $AccountNumber
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function BalanceInformation(string $AccountNumber)
     {
@@ -35,7 +35,7 @@ class BusinessBanking extends Bca
      * @param  string $AccountNumber
      * @param  string $startDate
      * @param  string $endDate
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function AccountStatement(string $AccountNumber, string $startDate, string $endDate)
     {
@@ -47,7 +47,7 @@ class BusinessBanking extends Bca
      * FundTransfer
      *
      * @param  array $fields
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function FundTransfer(array $fields)
     {

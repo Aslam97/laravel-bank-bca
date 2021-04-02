@@ -2,8 +2,9 @@
 
 namespace Aslam\Bca;
 
-use Aslam\Bca\Exceptions\ConnectionException;
-use Aslam\Bca\Exceptions\RequestException;
+use Aslam\Response\Exceptions\ConnectionException;
+use Aslam\Response\Exceptions\RequestException;
+use Aslam\Response\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 
@@ -88,9 +89,9 @@ class Bca
      * @param  string $httpMethod
      * @param  string $requestUrl
      * @param  array $options
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      *
-     * @throws \Aslam\Bca\Exceptions\RequestException
+     * @throws \Aslam\Response\Exceptions\RequestException
      */
     public function sendRequest(string $httpMethod, string $relativeUrl, array $requestBody = [])
     {

@@ -11,7 +11,7 @@ class GeneralInformation extends Bca
      *
      * @param  string $CurrencyCode
      * @param  string $RateType
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function ForexRate(string $CurrencyCode, string $RateType)
     {
@@ -36,7 +36,7 @@ class GeneralInformation extends Bca
      * @param  string $Longitude
      * @param  string $Count
      * @param  string $Radius
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function NearestATMLocation(string $Latitude, string $Longitude, string $Count = '10', string $Radius = '500')
     {

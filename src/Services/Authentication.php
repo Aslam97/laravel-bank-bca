@@ -9,7 +9,7 @@ class Authentication extends Bca
     /**
      * AccessToken
      *
-     * @return \Aslam\Bca\Response
+     * @return \Aslam\Response\Response
      */
     public function AccessToken()
     {
