@@ -3,7 +3,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/aslam/laravel-bank-bca.svg?style=flat-square)](https://packagist.org/packages/aslam/laravel-bank-bca)
 
-The Laravel Bank BRI package is meant to integrate your Application with Bank BCA (Bank Central Asia) API. For clearer and more complete documentation, please visit the official website [Developer BCA](https://developer.bca.co.id)
+The Laravel Bank BCA package is meant to integrate your Application with Bank BCA (Bank Central Asia) API. For clearer and more complete documentation, please visit the official website [Developer BCA](https://developer.bca.co.id)
 
 ## Features
 
